@@ -6,11 +6,18 @@ class ApiClient:
        self.company_id = company_id
        self.auth = auth
 
-    def listSessions(self, page = 0):
-        url = self.api_base_url + '/v1/sessions?company=' + self.company_id + '&page=' + str(page)
-        r = requests.get(url, auth=self.auth)
+    def listSessions(self, page = 0, filters = {}):
+        url = self.api_base_url + '/v1/advanced-search/sessions?company=' + self.company_id + '&page=' + str(page)
+        r = requests.post(url, auth=self.auth, json={'sessionInfo': filters})
         r.raise_for_status()
-        return r.json()
+        sessions_result = r.json()['sessionPage']
+        return {
+            'results': sessions_result['records'],
+            'page': sessions_result['number'],
+            'size': sessions_result['size'],
+            'totalPages': sessions_result['totalPages'],
+            'totalHits': sessions_result['totalRecords'],
+        }
 
     def getSession(self, session_id):
         r = requests.get(self.api_base_url + '/v1/sessions/' + session_id + '?company=' + self.company_id, auth=self.auth)

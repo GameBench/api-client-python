@@ -3,7 +3,17 @@ import os
 
 client = ApiClient(os.environ.get('GB_API_BASE_URL'), os.environ.get('GB_COMPANY_ID'), (os.environ.get('GB_API_EMAIL'), os.environ.get('GB_API_TOKEN')))
 
-sessions = client.listSessions()
+# filters = {
+#     'userEmail': ['example@gamebench.net'],
+#     'tags': [
+#         'foo:bar'
+#     ]
+# }
+
+filters = {}
+page = 0
+
+sessions = client.listSessions(page, filters)
 
 session = client.getSession('84759304-3add-47f9-b0bc-7461aff9cb8a')
 
