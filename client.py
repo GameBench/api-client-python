@@ -6,8 +6,9 @@ class ApiClient:
        self.company_id = company_id
        self.auth = auth
 
-    def listSessions(self):
-        r = requests.get(self.api_base_url + '/v1/sessions?company=' + self.company_id, auth=self.auth)
+    def listSessions(self, page = 0):
+        url = self.api_base_url + '/v1/sessions?company=' + self.company_id + '&page=' + str(page)
+        r = requests.get(url, auth=self.auth)
         r.raise_for_status()
         return r.json()
 
