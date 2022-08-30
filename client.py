@@ -33,3 +33,28 @@ class ApiClient:
         r = requests.get(self.api_base_url + '/v1/sessions/' + session_id + '/additional-files/' + file_name + '?company=' + self.company_id, auth=self.auth)
         r.raise_for_status()
         return r.text
+
+    def getSessionLatencyResults(self, session_id):
+        r = requests.get(self.api_base_url + '/v1/sessions/' + session_id + '/latency?company=' + self.company_id, auth=self.auth)
+        r.raise_for_status()
+        return r.json()
+
+    def getSessionFpsResults(self, session_id):
+        r = requests.get(self.api_base_url + '/v1/sessions/' + session_id + '/fps?company=' + self.company_id, auth=self.auth)
+        r.raise_for_status()
+        return r.json()        
+
+    def getSessionNetworkRttResults(self, session_id):
+        r = requests.get(self.api_base_url + '/v1/sessions/' + session_id + '/network-rtt?company=' + self.company_id, auth=self.auth)
+        r.raise_for_status()
+        return r.json() 
+        
+    def getSessionNetworkRttJitterResults(self, session_id):
+        r = requests.get(self.api_base_url + '/v1/sessions/' + session_id + '/network-rtt-jitter?company=' + self.company_id, auth=self.auth)
+        r.raise_for_status()
+        return r.json()
+
+    def getSessionNetworkResults(self, session_id):
+        r = requests.get(self.api_base_url + '/v1/sessions/' + session_id + '/network?company=' + self.company_id, auth=self.auth)
+        r.raise_for_status()
+        return r.json()
