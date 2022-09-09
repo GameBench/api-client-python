@@ -19,6 +19,10 @@ class ApiClient:
             'totalHits': sessions_result['totalRecords'],
         }
 
+    def deleteSession(self, session_id):
+        r = requests.delete(self.api_base_url + '/v1/sessions/' + session_id + '?company=' + self.company_id, auth=self.auth)
+        return r.ok
+
     def getSession(self, session_id):
         r = requests.get(self.api_base_url + '/v1/sessions/' + session_id + '?company=' + self.company_id, auth=self.auth)
         r.raise_for_status()
