@@ -4,3 +4,8 @@ idna==3.3
 pkg-resources==0.0.0
 requests==2.27.1
 urllib3==1.26.10
+PyQt5
+ipython
+jupyter
+tqdm
+notebook
