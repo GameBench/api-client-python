@@ -1,10 +1,24 @@
 import requests
+import logging
 
 class ApiClient:
-    def __init__(self, api_base_url, company_id, auth):
+    def __init__(self, api_base_url, company_id, auth, debug = False):
        self.api_base_url = api_base_url
        self.company_id = company_id
        self.auth = auth
+
+       if debug:
+           try:
+               from http.client import HTTPConnection
+           except ImportError:
+               from httplib import HTTPConnection
+
+           HTTPConnection.debuglevel = 1
+           logging.basicConfig()
+           logging.getLogger().setLevel(logging.DEBUG)
+           requests_log = logging.getLogger("urllib3")
+           requests_log.setLevel(logging.DEBUG)
+           requests_log.propagate = True
 
     def listSessions(self, page = 0, filters = {}):
         url = self.api_base_url + '/v1/advanced-search/sessions?company=' + self.company_id + '&page=' + str(page)
