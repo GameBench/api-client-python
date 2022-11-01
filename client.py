@@ -56,6 +56,11 @@ class ApiClient:
         r.raise_for_status()
         return r.content
 
+    def getSessionBatteryResults(self, session_id):
+        r = requests.get(self.api_base_url + '/v1/sessions/' + session_id + '/battery?company=' + self.company_id, auth=self.auth)
+        r.raise_for_status()
+        return r.json()
+
     def getSessionLatencyResults(self, session_id):
         r = requests.get(self.api_base_url + '/v1/sessions/' + session_id + '/latency?company=' + self.company_id, auth=self.auth)
         r.raise_for_status()
