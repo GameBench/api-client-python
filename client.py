@@ -54,7 +54,7 @@ class ApiClient:
     def getSessionAdditionalFileContents(self, session_id, file_name):
         r = requests.get(self.api_base_url + '/v1/sessions/' + session_id + '/additional-files/' + file_name + '?company=' + self.company_id, auth=self.auth)
         r.raise_for_status()
-        return r.text
+        return r.content
 
     def getSessionLatencyResults(self, session_id):
         r = requests.get(self.api_base_url + '/v1/sessions/' + session_id + '/latency?company=' + self.company_id, auth=self.auth)
