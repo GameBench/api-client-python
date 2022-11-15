@@ -1,5 +1,6 @@
 import requests
 import logging
+import shutil
 
 class ApiClient:
     def __init__(self, api_base_url, company_id, auth, debug = False):
@@ -85,3 +86,8 @@ class ApiClient:
         r = requests.get(self.api_base_url + '/v1/sessions/' + session_id + '/network?company=' + self.company_id, auth=self.auth)
         r.raise_for_status()
         return r.json()
+
+    def exportSession(self, session_id, dest):
+        with requests.get(self.api_base_url + '/v1/sessions/export/sessions/' + session_id + '?company=' + self.company_id, auth=self.auth, stream=True) as r:
+            with open(dest, 'wb') as f:
+                shutil.copyfileobj(r.raw, f)
