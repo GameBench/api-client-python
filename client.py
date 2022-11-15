@@ -91,3 +91,8 @@ class ApiClient:
         with requests.get(self.api_base_url + '/v1/sessions/export/sessions/' + session_id + '?company=' + self.company_id, auth=self.auth, stream=True) as r:
             with open(dest, 'wb') as f:
                 shutil.copyfileobj(r.raw, f)
+
+    def downloadSessionCsv(self, session_id, dest):
+        with requests.get(self.api_base_url + '/v1/sessions/' + session_id + '/export/csv?company=' + self.company_id, auth=self.auth, stream=True) as r:
+            with open(dest, 'wb') as f:
+                shutil.copyfileobj(r.raw, f)
