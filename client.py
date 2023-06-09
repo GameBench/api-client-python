@@ -23,7 +23,11 @@ class ApiClient:
 
     def listSessions(self, page = 0, filters = {}):
         url = self.api_base_url + '/v1/advanced-search/sessions?company=' + self.company_id + '&page=' + str(page)
-        r = requests.post(url, auth=self.auth, json={'sessionInfo': filters})
+        req_body = {'sessionInfo': filters}
+        if 'projects' in filters:
+            req_body['projects'] = filters['projects']
+            del filters['projects']
+        r = requests.post(url, auth=self.auth, json=req_body)
         r.raise_for_status()
         sessions_result = r.json()['sessionPage']
         return {
