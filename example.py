@@ -7,7 +7,8 @@ client = ApiClient(os.environ.get('GB_API_BASE_URL'), os.environ.get('GB_COMPANY
 #     'userEmail': ['example@gamebench.net'],
 #     'tags': [
 #         'foo:bar'
-#     ]
+#     ],
+#     'projects': ['project id', 'project id']
 # }
 
 filters = {}
