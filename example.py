@@ -9,6 +9,7 @@ client = ApiClient(os.environ.get('GB_API_BASE_URL'), os.environ.get('GB_COMPANY
 #         'foo:bar'
 #     ],
 #     'projects': ['project id', 'project id']
+#     'deviceModels': ['device model 1', 'device model 2'],
 # }
 
 filters = {}

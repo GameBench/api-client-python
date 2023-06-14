@@ -27,6 +27,11 @@ class ApiClient:
         if 'projects' in filters:
             req_body['projects'] = filters['projects']
             del filters['projects']
+
+        if 'deviceModels' in filters:
+            req_body['devices'] = filters['deviceModels']
+            del filters['deviceModels']
+
         r = requests.post(url, auth=self.auth, json=req_body)
         r.raise_for_status()
         sessions_result = r.json()['sessionPage']
