@@ -23,14 +23,58 @@ class ApiClient:
 
     def listSessions(self, page = 0, filters = {}):
         url = self.api_base_url + '/v1/advanced-search/sessions?company=' + self.company_id + '&page=' + str(page)
-        req_body = {'sessionInfo': filters}
+        req_body = {'sessionInfo': {}, 'appInfo': {}}
+
+        if 'userEmail' in filters:
+            req_body['sessionInfo']['userEmail'] = filters['userEmail']
+
+        if 'tags' in filters:
+            req_body['sessionInfo']['tags'] = filters['tags']
+
+        if 'durationStart' in filters:
+            req_body['sessionInfo']['durationStart'] = filters['durationStart']
+
+        if 'durationEnd' in filters:
+            req_body['sessionInfo']['durationEnd'] = filters['durationEnd']
+
+        if 'title' in filters:
+            req_body['sessionInfo']['title'] = filters['title']
+
+        if 'notes' in filters:
+            req_body['sessionInfo']['notes'] = filters['notes']
+
+        if 'dateStart' in filters:
+            req_body['sessionInfo']['dateStart'] = filters['dateStart']
+
+        if 'dateEnd' in filters:
+            req_body['sessionInfo']['dateEnd'] = filters['dateEnd']
+
+        if 'timePushedStart' in filters:
+            req_body['sessionInfo']['timePushedStart'] = filters['timePushedStart']
+
+        if 'timePushedEnd' in filters:
+            req_body['sessionInfo']['timePushedEnd'] = filters['timePushedEnd']
+
         if 'projects' in filters:
             req_body['projects'] = filters['projects']
-            del filters['projects']
 
         if 'deviceModels' in filters:
             req_body['devices'] = filters['deviceModels']
-            del filters['deviceModels']
+
+        if 'deviceManufacturers' in filters:
+            req_body['manufacturers'] = filters['deviceManufacturers']
+
+        if 'imported' in filters:
+            req_body['imported'] = filters['imported']
+
+        if 'appName' in filters:
+            req_body['appInfo']['name'] = filters['appName']
+
+        if 'appPackageName' in filters:
+            req_body['appInfo']['package'] = filters['appPackageName']
+
+        if 'appVersion' in filters:
+            req_body['appInfo']['version'] = filters['appVersion']
 
         r = requests.post(url, auth=self.auth, json=req_body)
         r.raise_for_status()

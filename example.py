@@ -8,8 +8,21 @@ client = ApiClient(os.environ.get('GB_API_BASE_URL'), os.environ.get('GB_COMPANY
 #     'tags': [
 #         'foo:bar'
 #     ],
-#     'projects': ['project id', 'project id']
+#     'durationStart': 0,
+#     'durationEnd': 0,
+#     'title': '',
+#     'notes': '',
+#     'dateStart': 0,
+#     'dateEnd': 0,
+#     'timePushedStart': 0,
+#     'timePushedEnd': 0,
+#     'projects': ['project id', 'project id'],
 #     'deviceModels': ['device model 1', 'device model 2'],
+#     'deviceManufacturers': [],
+#     'imported': True,
+#     'appName': [],
+#     'appPackageName': [],
+#     'appVersion': [],
 # }
 
 filters = {}
