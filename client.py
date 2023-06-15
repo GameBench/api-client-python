@@ -139,6 +139,24 @@ class ApiClient:
         r = requests.get(self.api_base_url + '/v1/sessions/' + session_id + '/network?company=' + self.company_id, auth=self.auth)
         r.raise_for_status()
         return r.json()
+    
+    def getSessionCpuResults(self, session_id):
+        r = requests.get(self.api_base_url + '/v1/sessions/' +
+                         session_id + '/cpu?company=' + self.company_id, auth=self.auth)
+        r.raise_for_status()
+        return r.json()
+
+    def getSessionGpuResults(self, session_id):
+        r = requests.get(self.api_base_url + '/v1/sessions/' + session_id +
+                         '/gpu/other?company=' + self.company_id, auth=self.auth)
+        r.raise_for_status()
+        return r.json()
+
+    def getSessionInstPowerResults(self, session_id):
+        r = requests.get(self.api_base_url + '/v1/sessions/' + session_id +
+                         '/power?company=' + self.company_id, auth=self.auth)
+        r.raise_for_status()
+        return r.json()    
 
     def exportSession(self, session_id, dest):
         with requests.get(self.api_base_url + '/v1/sessions/export/sessions/' + session_id + '?company=' + self.company_id, auth=self.auth, stream=True) as r:
