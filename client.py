@@ -21,8 +21,12 @@ class ApiClient:
            requests_log.setLevel(logging.DEBUG)
            requests_log.propagate = True
 
-    def listSessions(self, page = 0, filters = {}):
+    def listSessions(self, page = 0, filters = {}, sort = {}):
         url = self.api_base_url + '/v1/advanced-search/sessions?company=' + self.company_id + '&page=' + str(page)
+
+        if sort:
+            url = url + '&sort=' + sort['field'] + ':' + sort['direction']
+
         req_body = {'sessionInfo': {}, 'appInfo': {}}
 
         if 'userEmail' in filters:
