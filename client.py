@@ -1,9 +1,11 @@
 import requests
 import logging
 import shutil
+import os
 
 class ApiClient:
-    def __init__(self, api_base_url, company_id, auth, debug = False):
+    
+    def __init__(self, api_base_url=os.environ.get('GB_API_BASE_URL'), company_id=os.environ.get('GB_COMPANY_ID'), auth=(os.environ.get('GB_API_EMAIL'), os.environ.get('GB_API_TOKEN')), debug = False):
        self.api_base_url = api_base_url
        self.company_id = company_id
        self.auth = auth
