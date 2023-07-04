@@ -178,6 +178,6 @@ class ApiClient:
         r = requests.get(self.api_base_url + '/v1/explore/companies/' + self.company_id + '/apps/' + app_package_name + '/tags', auth=self.auth)
         return r.json()
 
-    def listApps(self, page = 1):
-        r = requests.get(self.api_base_url + '/v1/explore/companies/' + self.company_id + '/apps?page=' + str(page), auth=self.auth)
+    def listApps(self):
+        r = requests.get(self.api_base_url + '/v1/companies/' + self.company_id + '/apps', auth=self.auth)
         return r.json()
