@@ -173,3 +173,11 @@ class ApiClient:
         with requests.get(self.api_base_url + '/v1/sessions/' + session_id + '/export/csv?company=' + self.company_id, auth=self.auth, stream=True) as r:
             with open(dest, 'wb') as f:
                 shutil.copyfileobj(r.raw, f)
+
+    def listAppTags(self, app_package_name):
+        r = requests.get(self.api_base_url + '/v1/explore/companies/' + self.company_id + '/apps/' + app_package_name + '/tags', auth=self.auth)
+        return r.json()
+
+    def listApps(self, page = 1):
+        r = requests.get(self.api_base_url + '/v1/explore/companies/' + self.company_id + '/apps?page=' + str(page), auth=self.auth)
+        return r.json()
