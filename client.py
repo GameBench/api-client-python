@@ -164,6 +164,11 @@ class ApiClient:
         r.raise_for_status()
         return r.json()    
 
+    def getSessionLogcat(self, session_id):
+        r = requests.get(self.api_base_url + '/v1/sessions/' + session_id + '/download/logcat?company=' + self.company_id, auth=self.auth)
+        r.raise_for_status()
+        return r.content
+
     def exportSession(self, session_id, dest):
         with requests.get(self.api_base_url + '/v1/sessions/export/sessions/' + session_id + '?company=' + self.company_id, auth=self.auth, stream=True) as r:
             with open(dest, 'wb') as f:
@@ -173,6 +178,11 @@ class ApiClient:
         with requests.get(self.api_base_url + '/v1/sessions/' + session_id + '/export/csv?company=' + self.company_id, auth=self.auth, stream=True) as r:
             with open(dest, 'wb') as f:
                 shutil.copyfileobj(r.raw, f)
+
+    def downloadSessionLogcat(self, session_id, dest):
+        with requests.get(self.api_base_url + '/v1/sessions/' + session_id + '/download/logcat?company=' + self.company_id, auth=self.auth, stream=True) as r:
+            with open(dest, 'wb') as f:
+                shutil.copyfileobj(r.raw, f)                      
 
     def listAppTags(self, app_package_name):
         r = requests.get(self.api_base_url + '/v1/explore/companies/' + self.company_id + '/apps/' + app_package_name + '/tags', auth=self.auth)
