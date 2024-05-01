@@ -191,3 +191,15 @@ class ApiClient:
     def listApps(self):
         r = requests.get(self.api_base_url + '/v1/companies/' + self.company_id + '/apps', auth=self.auth)
         return r.json()
+
+    def uploadSession(self, zip_path):
+        files = {'file': open(zip_path, 'rb')}
+        values = {'import': '1'}
+        r = requests.post(self.api_base_url + '/v1/sessions/import', auth=self.auth, files=files, data=values)
+        r.raise_for_status()
+        return r.content
+
+    def getSessionFrametimes(self, session_id):
+        r = requests.get(self.api_base_url + '/v1/sessions/' + session_id + '/frametimes?company=' + self.company_id, auth=self.auth)
+        r.raise_for_status()
+        return r.json()
