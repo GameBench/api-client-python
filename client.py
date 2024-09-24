@@ -203,3 +203,8 @@ class ApiClient:
         r = requests.get(self.api_base_url + '/v1/sessions/' + session_id + '/frametimes?company=' + self.company_id, auth=self.auth)
         r.raise_for_status()
         return r.json()
+
+    def getSessionNotes(self, session_id):
+        r = requests.get(self.api_base_url + '/v1/sessions/' + session_id + '/notes?company=' + self.company_id, auth=self.auth)
+        r.raise_for_status()
+        return r.json()
