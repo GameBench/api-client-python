@@ -208,3 +208,13 @@ class ApiClient:
         r = requests.get(self.api_base_url + '/v1/sessions/' + session_id + '/notes?company=' + self.company_id, auth=self.auth)
         r.raise_for_status()
         return r.json()
+
+    def shareSession(self, session_id):
+        r = requests.post(self.api_base_url + '/v1/sessions/' + session_id + '/share?company=' + self.company_id, auth=self.auth)
+        r.raise_for_status()
+        return r.json()
+
+    def unshareSession(self, session_id):
+        r = requests.post(self.api_base_url + '/v1/sessions/' + session_id + '/unshare?company=' + self.company_id, auth=self.auth)
+        r.raise_for_status()
+        return r.json()
