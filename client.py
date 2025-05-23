@@ -179,6 +179,11 @@ class ApiClient:
             with open(dest, 'wb') as f:
                 shutil.copyfileobj(r.raw, f)
 
+    def downloadSessionSpreadsheet(self, session_id, dest):
+        with requests.get(self.api_base_url + '/v1/sessions/' + session_id + '/export/spreadsheet?company=' + self.company_id, auth=self.auth, stream=True) as r:
+            with open(dest, 'wb') as f:
+                shutil.copyfileobj(r.raw, f)
+
     def downloadSessionLogcat(self, session_id, dest):
         with requests.get(self.api_base_url + '/v1/sessions/' + session_id + '/download/logcat?company=' + self.company_id, auth=self.auth, stream=True) as r:
             with open(dest, 'wb') as f:
