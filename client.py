@@ -223,3 +223,7 @@ class ApiClient:
         r = requests.post(self.api_base_url + '/v1/sessions/' + session_id + '/unshare?company=' + self.company_id, auth=self.auth)
         r.raise_for_status()
         return r.json()
+
+    def permanentlyDeleteSession(self, session_id):
+        r = requests.post(self.api_base_url + '/v1/sessions/' + session_id + '/permanently-delete?company=' + self.company_id, auth=self.auth)
+        r.raise_for_status()
