@@ -227,3 +227,8 @@ class ApiClient:
     def permanentlyDeleteSession(self, session_id):
         r = requests.post(self.api_base_url + '/v1/sessions/' + session_id + '/permanently-delete?company=' + self.company_id, auth=self.auth)
         r.raise_for_status()
+
+    def getSessionMarkers(self, session_id):
+        r = requests.get(self.api_base_url + '/v1/sessions/' + session_id + '/markers?company=' + self.company_id, auth=self.auth)
+        r.raise_for_status()
+        return r.json()
