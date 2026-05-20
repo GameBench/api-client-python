@@ -30,6 +30,12 @@ undocumented v1 endpoints, or for legacy scripts that already use it.
 
 ### Using the generated client
 
+Install it into your venv from this repo (it isn't on PyPI yet):
+
+```
+./env/bin/pip install -e ./gamebench-api-client
+```
+
 The generated `AuthenticatedClient` defaults to `Authorization: Bearer`,
 but the GameBench API uses HTTP Basic. Use the base `Client` with httpx
 auth instead:
@@ -44,8 +50,14 @@ client = Client(
     httpx_args={"auth": (os.environ["GB_API_EMAIL"], os.environ["GB_API_TOKEN"])},
 )
 
-session = get_session.sync(session_id="...", client=client, company_id=os.environ["GB_COMPANY_ID"])
+session = get_session.sync(session_id="...", client=client)
 ```
+
+See [example_v2.py](example_v2.py) for a runnable walkthrough.
+
+Note: some response shapes (e.g. `PageResultsItem`, most metric responses)
+are not yet defined in the spec, so the generated models expose them via
+`additional_properties` rather than typed attributes.
 
 ### Regenerating the client
 
