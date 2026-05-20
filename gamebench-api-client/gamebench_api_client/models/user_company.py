@@ -14,12 +14,12 @@ from ..types import UNSET, Unset
 
 
 
-T = TypeVar("T", bound="GetSessionCoreFreqMetricResponse200")
+T = TypeVar("T", bound="UserCompany")
 
 
 
 @_attrs_define
-class GetSessionCoreFreqMetricResponse200:
+class UserCompany:
     """ 
      """
 
@@ -41,12 +41,12 @@ class GetSessionCoreFreqMetricResponse200:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        get_session_core_freq_metric_response_200 = cls(
+        user_company = cls(
         )
 
 
-        get_session_core_freq_metric_response_200.additional_properties = d
-        return get_session_core_freq_metric_response_200
+        user_company.additional_properties = d
+        return user_company
 
     @property
     def additional_keys(self) -> list[str]:

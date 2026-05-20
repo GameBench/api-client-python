@@ -14,12 +14,12 @@ from ..types import UNSET, Unset
 
 
 
-T = TypeVar("T", bound="GetSessionConnectionSummaryItemsResponse200")
+T = TypeVar("T", bound="SessionDevice")
 
 
 
 @_attrs_define
-class GetSessionConnectionSummaryItemsResponse200:
+class SessionDevice:
     """ 
      """
 
@@ -41,12 +41,12 @@ class GetSessionConnectionSummaryItemsResponse200:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        get_session_connection_summary_items_response_200 = cls(
+        session_device = cls(
         )
 
 
-        get_session_connection_summary_items_response_200.additional_properties = d
-        return get_session_connection_summary_items_response_200
+        session_device.additional_properties = d
+        return session_device
 
     @property
     def additional_keys(self) -> list[str]:

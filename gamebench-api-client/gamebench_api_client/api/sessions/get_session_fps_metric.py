@@ -9,7 +9,7 @@ from ...types import Response, UNSET
 from ... import errors
 
 from ...models.error import Error
-from ...models.get_session_fps_metric_response_200 import GetSessionFpsMetricResponse200
+from ...models.metric_response import MetricResponse
 from typing import cast
 
 
@@ -34,9 +34,9 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | GetSessionFpsMetricResponse200 | None:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | MetricResponse | None:
     if response.status_code == 200:
-        response_200 = GetSessionFpsMetricResponse200.from_dict(response.json())
+        response_200 = MetricResponse.from_dict(response.json())
 
 
 
@@ -62,7 +62,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | GetSessionFpsMetricResponse200]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | MetricResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -76,7 +76,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
 
-) -> Response[Error | GetSessionFpsMetricResponse200]:
+) -> Response[Error | MetricResponse]:
     """ FPS metric samples for a session
 
      Per-second frame-rate samples for the session. Returns 404
@@ -91,7 +91,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | GetSessionFpsMetricResponse200]
+        Response[Error | MetricResponse]
      """
 
 
@@ -111,7 +111,7 @@ def sync(
     *,
     client: AuthenticatedClient | Client,
 
-) -> Error | GetSessionFpsMetricResponse200 | None:
+) -> Error | MetricResponse | None:
     """ FPS metric samples for a session
 
      Per-second frame-rate samples for the session. Returns 404
@@ -126,7 +126,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | GetSessionFpsMetricResponse200
+        Error | MetricResponse
      """
 
 
@@ -141,7 +141,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
 
-) -> Response[Error | GetSessionFpsMetricResponse200]:
+) -> Response[Error | MetricResponse]:
     """ FPS metric samples for a session
 
      Per-second frame-rate samples for the session. Returns 404
@@ -156,7 +156,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | GetSessionFpsMetricResponse200]
+        Response[Error | MetricResponse]
      """
 
 
@@ -176,7 +176,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient | Client,
 
-) -> Error | GetSessionFpsMetricResponse200 | None:
+) -> Error | MetricResponse | None:
     """ FPS metric samples for a session
 
      Per-second frame-rate samples for the session. Returns 404
@@ -191,7 +191,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | GetSessionFpsMetricResponse200
+        Error | MetricResponse
      """
 
 

@@ -14,16 +14,16 @@ from ..types import UNSET, Unset
 
 
 
-T = TypeVar("T", bound="GetSessionBatteryMetricResponse200")
+T = TypeVar("T", bound="SessionTags")
 
 
 
 @_attrs_define
-class GetSessionBatteryMetricResponse200:
+class SessionTags:
     """ 
      """
 
-    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+    additional_properties: dict[str, str] = _attrs_field(init=False, factory=dict)
 
 
 
@@ -41,21 +41,21 @@ class GetSessionBatteryMetricResponse200:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        get_session_battery_metric_response_200 = cls(
+        session_tags = cls(
         )
 
 
-        get_session_battery_metric_response_200.additional_properties = d
-        return get_session_battery_metric_response_200
+        session_tags.additional_properties = d
+        return session_tags
 
     @property
     def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
-    def __getitem__(self, key: str) -> Any:
+    def __getitem__(self, key: str) -> str:
         return self.additional_properties[key]
 
-    def __setitem__(self, key: str, value: Any) -> None:
+    def __setitem__(self, key: str, value: str) -> None:
         self.additional_properties[key] = value
 
     def __delitem__(self, key: str) -> None:

@@ -15,12 +15,12 @@ from ..types import UNSET, Unset
 
 
 
-T = TypeVar("T", bound="GetSessionResponse200App")
+T = TypeVar("T", bound="SessionApp")
 
 
 
 @_attrs_define
-class GetSessionResponse200App:
+class SessionApp:
     """ 
         Attributes:
             name (str | Unset):
@@ -93,7 +93,7 @@ class GetSessionResponse200App:
 
         icon_url = d.pop("iconUrl", UNSET)
 
-        get_session_response_200_app = cls(
+        session_app = cls(
             name=name,
             package_name=package_name,
             version=version,
@@ -103,8 +103,8 @@ class GetSessionResponse200App:
         )
 
 
-        get_session_response_200_app.additional_properties = d
-        return get_session_response_200_app
+        session_app.additional_properties = d
+        return session_app
 
     @property
     def additional_keys(self) -> list[str]:

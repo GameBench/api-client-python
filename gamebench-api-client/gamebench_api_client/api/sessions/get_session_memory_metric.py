@@ -9,7 +9,7 @@ from ...types import Response, UNSET
 from ... import errors
 
 from ...models.error import Error
-from ...models.get_session_memory_metric_response_200 import GetSessionMemoryMetricResponse200
+from ...models.metric_response import MetricResponse
 from typing import cast
 
 
@@ -34,9 +34,9 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | GetSessionMemoryMetricResponse200 | None:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | MetricResponse | None:
     if response.status_code == 200:
-        response_200 = GetSessionMemoryMetricResponse200.from_dict(response.json())
+        response_200 = MetricResponse.from_dict(response.json())
 
 
 
@@ -62,7 +62,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | GetSessionMemoryMetricResponse200]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | MetricResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -76,7 +76,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
 
-) -> Response[Error | GetSessionMemoryMetricResponse200]:
+) -> Response[Error | MetricResponse]:
     """ Memory metric samples for a session
 
      Samples of the session's total memory usage over time.
@@ -99,7 +99,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | GetSessionMemoryMetricResponse200]
+        Response[Error | MetricResponse]
      """
 
 
@@ -119,7 +119,7 @@ def sync(
     *,
     client: AuthenticatedClient | Client,
 
-) -> Error | GetSessionMemoryMetricResponse200 | None:
+) -> Error | MetricResponse | None:
     """ Memory metric samples for a session
 
      Samples of the session's total memory usage over time.
@@ -142,7 +142,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | GetSessionMemoryMetricResponse200
+        Error | MetricResponse
      """
 
 
@@ -157,7 +157,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
 
-) -> Response[Error | GetSessionMemoryMetricResponse200]:
+) -> Response[Error | MetricResponse]:
     """ Memory metric samples for a session
 
      Samples of the session's total memory usage over time.
@@ -180,7 +180,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | GetSessionMemoryMetricResponse200]
+        Response[Error | MetricResponse]
      """
 
 
@@ -200,7 +200,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient | Client,
 
-) -> Error | GetSessionMemoryMetricResponse200 | None:
+) -> Error | MetricResponse | None:
     """ Memory metric samples for a session
 
      Samples of the session's total memory usage over time.
@@ -223,7 +223,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | GetSessionMemoryMetricResponse200
+        Error | MetricResponse
      """
 
 

@@ -15,20 +15,25 @@ from ..types import UNSET, Unset
 
 
 
-T = TypeVar("T", bound="GetSessionResponse200User")
+T = TypeVar("T", bound="MetricStats")
 
 
 
 @_attrs_define
-class GetSessionResponse200User:
-    """ 
+class MetricStats:
+    """ Summary statistics over a metric's samples.
+
         Attributes:
-            data_set (str | Unset):
-            user_play_account (str | Unset):
+            min_ (float | Unset):
+            max_ (float | Unset):
+            avg (float | Unset):
+            median (float | Unset):
      """
 
-    data_set: str | Unset = UNSET
-    user_play_account: str | Unset = UNSET
+    min_: float | Unset = UNSET
+    max_: float | Unset = UNSET
+    avg: float | Unset = UNSET
+    median: float | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -36,19 +41,27 @@ class GetSessionResponse200User:
 
 
     def to_dict(self) -> dict[str, Any]:
-        data_set = self.data_set
+        min_ = self.min_
 
-        user_play_account = self.user_play_account
+        max_ = self.max_
+
+        avg = self.avg
+
+        median = self.median
 
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({
         })
-        if data_set is not UNSET:
-            field_dict["dataSet"] = data_set
-        if user_play_account is not UNSET:
-            field_dict["userPlayAccount"] = user_play_account
+        if min_ is not UNSET:
+            field_dict["min"] = min_
+        if max_ is not UNSET:
+            field_dict["max"] = max_
+        if avg is not UNSET:
+            field_dict["avg"] = avg
+        if median is not UNSET:
+            field_dict["median"] = median
 
         return field_dict
 
@@ -57,18 +70,24 @@ class GetSessionResponse200User:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        data_set = d.pop("dataSet", UNSET)
+        min_ = d.pop("min", UNSET)
 
-        user_play_account = d.pop("userPlayAccount", UNSET)
+        max_ = d.pop("max", UNSET)
 
-        get_session_response_200_user = cls(
-            data_set=data_set,
-            user_play_account=user_play_account,
+        avg = d.pop("avg", UNSET)
+
+        median = d.pop("median", UNSET)
+
+        metric_stats = cls(
+            min_=min_,
+            max_=max_,
+            avg=avg,
+            median=median,
         )
 
 
-        get_session_response_200_user.additional_properties = d
-        return get_session_response_200_user
+        metric_stats.additional_properties = d
+        return metric_stats
 
     @property
     def additional_keys(self) -> list[str]:

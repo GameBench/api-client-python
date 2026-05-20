@@ -9,7 +9,7 @@ from ...types import Response, UNSET
 from ... import errors
 
 from ...models.error import Error
-from ...models.get_session_android_memory_metric_response_200 import GetSessionAndroidMemoryMetricResponse200
+from ...models.metric_response import MetricResponse
 from typing import cast
 
 
@@ -34,9 +34,9 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | GetSessionAndroidMemoryMetricResponse200 | None:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | MetricResponse | None:
     if response.status_code == 200:
-        response_200 = GetSessionAndroidMemoryMetricResponse200.from_dict(response.json())
+        response_200 = MetricResponse.from_dict(response.json())
 
 
 
@@ -62,7 +62,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | GetSessionAndroidMemoryMetricResponse200]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | MetricResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -76,7 +76,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
 
-) -> Response[Error | GetSessionAndroidMemoryMetricResponse200]:
+) -> Response[Error | MetricResponse]:
     """ Android-specific memory metric samples
 
      Android-specific memory samples (private dirty, proportional
@@ -96,7 +96,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | GetSessionAndroidMemoryMetricResponse200]
+        Response[Error | MetricResponse]
      """
 
 
@@ -116,7 +116,7 @@ def sync(
     *,
     client: AuthenticatedClient | Client,
 
-) -> Error | GetSessionAndroidMemoryMetricResponse200 | None:
+) -> Error | MetricResponse | None:
     """ Android-specific memory metric samples
 
      Android-specific memory samples (private dirty, proportional
@@ -136,7 +136,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | GetSessionAndroidMemoryMetricResponse200
+        Error | MetricResponse
      """
 
 
@@ -151,7 +151,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
 
-) -> Response[Error | GetSessionAndroidMemoryMetricResponse200]:
+) -> Response[Error | MetricResponse]:
     """ Android-specific memory metric samples
 
      Android-specific memory samples (private dirty, proportional
@@ -171,7 +171,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | GetSessionAndroidMemoryMetricResponse200]
+        Response[Error | MetricResponse]
      """
 
 
@@ -191,7 +191,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient | Client,
 
-) -> Error | GetSessionAndroidMemoryMetricResponse200 | None:
+) -> Error | MetricResponse | None:
     """ Android-specific memory metric samples
 
      Android-specific memory samples (private dirty, proportional
@@ -211,7 +211,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | GetSessionAndroidMemoryMetricResponse200
+        Error | MetricResponse
      """
 
 

@@ -9,7 +9,7 @@ from ...types import Response, UNSET
 from ... import errors
 
 from ...models.error import Error
-from ...models.get_session_connection_summary_items_response_200 import GetSessionConnectionSummaryItemsResponse200
+from ...models.metric_response import MetricResponse
 from typing import cast
 
 
@@ -34,9 +34,9 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | GetSessionConnectionSummaryItemsResponse200 | None:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | MetricResponse | None:
     if response.status_code == 200:
-        response_200 = GetSessionConnectionSummaryItemsResponse200.from_dict(response.json())
+        response_200 = MetricResponse.from_dict(response.json())
 
 
 
@@ -55,7 +55,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | GetSessionConnectionSummaryItemsResponse200]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | MetricResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -69,7 +69,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
 
-) -> Response[Error | GetSessionConnectionSummaryItemsResponse200]:
+) -> Response[Error | MetricResponse]:
     """ Per-connection network summary entries
 
     Args:
@@ -80,7 +80,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | GetSessionConnectionSummaryItemsResponse200]
+        Response[Error | MetricResponse]
      """
 
 
@@ -100,7 +100,7 @@ def sync(
     *,
     client: AuthenticatedClient | Client,
 
-) -> Error | GetSessionConnectionSummaryItemsResponse200 | None:
+) -> Error | MetricResponse | None:
     """ Per-connection network summary entries
 
     Args:
@@ -111,7 +111,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | GetSessionConnectionSummaryItemsResponse200
+        Error | MetricResponse
      """
 
 
@@ -126,7 +126,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
 
-) -> Response[Error | GetSessionConnectionSummaryItemsResponse200]:
+) -> Response[Error | MetricResponse]:
     """ Per-connection network summary entries
 
     Args:
@@ -137,7 +137,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | GetSessionConnectionSummaryItemsResponse200]
+        Response[Error | MetricResponse]
      """
 
 
@@ -157,7 +157,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient | Client,
 
-) -> Error | GetSessionConnectionSummaryItemsResponse200 | None:
+) -> Error | MetricResponse | None:
     """ Per-connection network summary entries
 
     Args:
@@ -168,7 +168,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | GetSessionConnectionSummaryItemsResponse200
+        Error | MetricResponse
      """
 
 

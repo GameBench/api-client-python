@@ -8,21 +8,27 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
 
 
 
 
 
 
-T = TypeVar("T", bound="GetSessionFpsMetricResponse200")
+T = TypeVar("T", bound="SessionUser")
 
 
 
 @_attrs_define
-class GetSessionFpsMetricResponse200:
+class SessionUser:
     """ 
+        Attributes:
+            data_set (str | Unset):
+            user_play_account (str | Unset):
      """
 
+    data_set: str | Unset = UNSET
+    user_play_account: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -30,9 +36,19 @@ class GetSessionFpsMetricResponse200:
 
 
     def to_dict(self) -> dict[str, Any]:
-        
+        data_set = self.data_set
+
+        user_play_account = self.user_play_account
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
+        field_dict.update({
+        })
+        if data_set is not UNSET:
+            field_dict["dataSet"] = data_set
+        if user_play_account is not UNSET:
+            field_dict["userPlayAccount"] = user_play_account
 
         return field_dict
 
@@ -41,12 +57,18 @@ class GetSessionFpsMetricResponse200:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        get_session_fps_metric_response_200 = cls(
+        data_set = d.pop("dataSet", UNSET)
+
+        user_play_account = d.pop("userPlayAccount", UNSET)
+
+        session_user = cls(
+            data_set=data_set,
+            user_play_account=user_play_account,
         )
 
 
-        get_session_fps_metric_response_200.additional_properties = d
-        return get_session_fps_metric_response_200
+        session_user.additional_properties = d
+        return session_user
 
     @property
     def additional_keys(self) -> list[str]:

@@ -8,21 +8,25 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
 
 
 
 
 
 
-T = TypeVar("T", bound="GetSessionOtherGpuMetricResponse200")
+T = TypeVar("T", bound="UserPerson")
 
 
 
 @_attrs_define
-class GetSessionOtherGpuMetricResponse200:
+class UserPerson:
     """ 
+        Attributes:
+            username (str | Unset):
      """
 
+    username: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -30,9 +34,15 @@ class GetSessionOtherGpuMetricResponse200:
 
 
     def to_dict(self) -> dict[str, Any]:
-        
+        username = self.username
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
+        field_dict.update({
+        })
+        if username is not UNSET:
+            field_dict["username"] = username
 
         return field_dict
 
@@ -41,12 +51,15 @@ class GetSessionOtherGpuMetricResponse200:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        get_session_other_gpu_metric_response_200 = cls(
+        username = d.pop("username", UNSET)
+
+        user_person = cls(
+            username=username,
         )
 
 
-        get_session_other_gpu_metric_response_200.additional_properties = d
-        return get_session_other_gpu_metric_response_200
+        user_person.additional_properties = d
+        return user_person
 
     @property
     def additional_keys(self) -> list[str]:

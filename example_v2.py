@@ -25,15 +25,17 @@ with client as client:
     print(f'Collection "{first_collection.name}" has {page.total_hits} sessions')
 
     if page.results:
-        # The spec leaves PageResultsItem (and most metric responses) untyped,
-        # so fields live in `.additional_properties` rather than as attributes.
+        # The spec models PageOfSession.results as Session items via allOf,
+        # but openapi-python-client doesn't apply the override and emits the
+        # inherited untyped PageResultsItem instead — so the id still lives in
+        # `additional_properties` for now.
         session_id = page.results[0].additional_properties['id']
         session = get_session.sync(session_id=session_id, client=client)
         print(f'Session {session_id} → {session.url}')
 
         fps = get_session_fps_metric.sync(session_id=session_id, client=client)
-        if fps:
-            print(f'FPS metric keys: {list(fps.additional_properties.keys())}')
+        if fps and fps.samples:
+            print(f'FPS: {len(fps.samples)} samples')
 
     # `sync_detailed` exposes status_code and the raw response.
     detailed = get_session.sync_detailed(session_id='does-not-exist', client=client)

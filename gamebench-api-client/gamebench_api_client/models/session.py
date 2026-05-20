@@ -12,33 +12,31 @@ from ..types import UNSET, Unset
 from typing import cast
 
 if TYPE_CHECKING:
-  from ..models.get_session_response_200_app import GetSessionResponse200App
-  from ..models.get_session_response_200_device import GetSessionResponse200Device
-  from ..models.get_session_response_200_owners import GetSessionResponse200Owners
-  from ..models.get_session_response_200_tags import GetSessionResponse200Tags
-  from ..models.get_session_response_200_user import GetSessionResponse200User
+  from ..models.session_app import SessionApp
+  from ..models.session_device import SessionDevice
+  from ..models.session_owners import SessionOwners
+  from ..models.session_tags import SessionTags
+  from ..models.session_user import SessionUser
 
 
 
 
 
-T = TypeVar("T", bound="GetSessionResponse200")
+T = TypeVar("T", bound="Session")
 
 
 
 @_attrs_define
-class GetSessionResponse200:
+class Session:
     """ 
         Attributes:
-            owners (GetSessionResponse200Owners):
-            user (GetSessionResponse200User):
-            app (GetSessionResponse200App):
-            device (GetSessionResponse200Device):
+            owners (SessionOwners):
+            user (SessionUser):
+            app (SessionApp):
+            device (SessionDevice):
             id (str | Unset):
             uuid (str | Unset):
-            url (str | Unset): Dashboard URL appended server-side. Includes
-                `collectionId` and `companyId` query params when
-                known.
+            url (str | Unset): Dashboard URL appended server-side by `GET /v2/sessions/{sessionId}`.
             collection_id (str | Unset):
             session_title (None | str | Unset):
             session_date (int | Unset): Unix epoch milliseconds.
@@ -46,14 +44,15 @@ class GetSessionResponse200:
             time_played (int | Unset): Duration in ms.
             is_shared (bool | Unset):
             is_active (bool | Unset):
+            is_charging (bool | Unset):
             imported (bool | Unset):
-            tags (GetSessionResponse200Tags | Unset):
+            tags (SessionTags | Unset):
      """
 
-    owners: GetSessionResponse200Owners
-    user: GetSessionResponse200User
-    app: GetSessionResponse200App
-    device: GetSessionResponse200Device
+    owners: SessionOwners
+    user: SessionUser
+    app: SessionApp
+    device: SessionDevice
     id: str | Unset = UNSET
     uuid: str | Unset = UNSET
     url: str | Unset = UNSET
@@ -64,8 +63,9 @@ class GetSessionResponse200:
     time_played: int | Unset = UNSET
     is_shared: bool | Unset = UNSET
     is_active: bool | Unset = UNSET
+    is_charging: bool | Unset = UNSET
     imported: bool | Unset = UNSET
-    tags: GetSessionResponse200Tags | Unset = UNSET
+    tags: SessionTags | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -73,11 +73,11 @@ class GetSessionResponse200:
 
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.get_session_response_200_app import GetSessionResponse200App
-        from ..models.get_session_response_200_device import GetSessionResponse200Device
-        from ..models.get_session_response_200_owners import GetSessionResponse200Owners
-        from ..models.get_session_response_200_tags import GetSessionResponse200Tags
-        from ..models.get_session_response_200_user import GetSessionResponse200User
+        from ..models.session_app import SessionApp
+        from ..models.session_device import SessionDevice
+        from ..models.session_owners import SessionOwners
+        from ..models.session_tags import SessionTags
+        from ..models.session_user import SessionUser
         owners = self.owners.to_dict()
 
         user = self.user.to_dict()
@@ -109,6 +109,8 @@ class GetSessionResponse200:
         is_shared = self.is_shared
 
         is_active = self.is_active
+
+        is_charging = self.is_charging
 
         imported = self.imported
 
@@ -145,6 +147,8 @@ class GetSessionResponse200:
             field_dict["isShared"] = is_shared
         if is_active is not UNSET:
             field_dict["isActive"] = is_active
+        if is_charging is not UNSET:
+            field_dict["isCharging"] = is_charging
         if imported is not UNSET:
             field_dict["imported"] = imported
         if tags is not UNSET:
@@ -156,28 +160,28 @@ class GetSessionResponse200:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_session_response_200_app import GetSessionResponse200App
-        from ..models.get_session_response_200_device import GetSessionResponse200Device
-        from ..models.get_session_response_200_owners import GetSessionResponse200Owners
-        from ..models.get_session_response_200_tags import GetSessionResponse200Tags
-        from ..models.get_session_response_200_user import GetSessionResponse200User
+        from ..models.session_app import SessionApp
+        from ..models.session_device import SessionDevice
+        from ..models.session_owners import SessionOwners
+        from ..models.session_tags import SessionTags
+        from ..models.session_user import SessionUser
         d = dict(src_dict)
-        owners = GetSessionResponse200Owners.from_dict(d.pop("owners"))
+        owners = SessionOwners.from_dict(d.pop("owners"))
 
 
 
 
-        user = GetSessionResponse200User.from_dict(d.pop("user"))
+        user = SessionUser.from_dict(d.pop("user"))
 
 
 
 
-        app = GetSessionResponse200App.from_dict(d.pop("app"))
+        app = SessionApp.from_dict(d.pop("app"))
 
 
 
 
-        device = GetSessionResponse200Device.from_dict(d.pop("device"))
+        device = SessionDevice.from_dict(d.pop("device"))
 
 
 
@@ -210,19 +214,21 @@ class GetSessionResponse200:
 
         is_active = d.pop("isActive", UNSET)
 
+        is_charging = d.pop("isCharging", UNSET)
+
         imported = d.pop("imported", UNSET)
 
         _tags = d.pop("tags", UNSET)
-        tags: GetSessionResponse200Tags | Unset
+        tags: SessionTags | Unset
         if isinstance(_tags,  Unset):
             tags = UNSET
         else:
-            tags = GetSessionResponse200Tags.from_dict(_tags)
+            tags = SessionTags.from_dict(_tags)
 
 
 
 
-        get_session_response_200 = cls(
+        session = cls(
             owners=owners,
             user=user,
             app=app,
@@ -237,13 +243,14 @@ class GetSessionResponse200:
             time_played=time_played,
             is_shared=is_shared,
             is_active=is_active,
+            is_charging=is_charging,
             imported=imported,
             tags=tags,
         )
 
 
-        get_session_response_200.additional_properties = d
-        return get_session_response_200
+        session.additional_properties = d
+        return session
 
     @property
     def additional_keys(self) -> list[str]:

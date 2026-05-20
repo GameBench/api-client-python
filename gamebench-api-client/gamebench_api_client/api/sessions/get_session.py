@@ -9,7 +9,7 @@ from ...types import Response, UNSET
 from ... import errors
 
 from ...models.error import Error
-from ...models.get_session_response_200 import GetSessionResponse200
+from ...models.session import Session
 from typing import cast
 
 
@@ -34,9 +34,9 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | GetSessionResponse200 | None:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | Session | None:
     if response.status_code == 200:
-        response_200 = GetSessionResponse200.from_dict(response.json())
+        response_200 = Session.from_dict(response.json())
 
 
 
@@ -62,7 +62,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | GetSessionResponse200]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | Session]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -76,7 +76,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
 
-) -> Response[Error | GetSessionResponse200]:
+) -> Response[Error | Session]:
     r""" Fetch a single session by id
 
      Returns the full session document, with an extra `url` field
@@ -106,7 +106,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | GetSessionResponse200]
+        Response[Error | Session]
      """
 
 
@@ -126,7 +126,7 @@ def sync(
     *,
     client: AuthenticatedClient | Client,
 
-) -> Error | GetSessionResponse200 | None:
+) -> Error | Session | None:
     r""" Fetch a single session by id
 
      Returns the full session document, with an extra `url` field
@@ -156,7 +156,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | GetSessionResponse200
+        Error | Session
      """
 
 
@@ -171,7 +171,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
 
-) -> Response[Error | GetSessionResponse200]:
+) -> Response[Error | Session]:
     r""" Fetch a single session by id
 
      Returns the full session document, with an extra `url` field
@@ -201,7 +201,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | GetSessionResponse200]
+        Response[Error | Session]
      """
 
 
@@ -221,7 +221,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient | Client,
 
-) -> Error | GetSessionResponse200 | None:
+) -> Error | Session | None:
     r""" Fetch a single session by id
 
      Returns the full session document, with an extra `url` field
@@ -251,7 +251,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | GetSessionResponse200
+        Error | Session
      """
 
 

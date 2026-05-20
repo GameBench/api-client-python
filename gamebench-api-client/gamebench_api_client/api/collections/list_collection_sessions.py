@@ -10,7 +10,7 @@ from ... import errors
 
 from ...models.error import Error
 from ...models.list_collection_sessions_body import ListCollectionSessionsBody
-from ...models.page import Page
+from ...models.page_of_session import PageOfSession
 from ...types import UNSET, Unset
 from typing import cast
 
@@ -60,9 +60,9 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | Page | None:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | PageOfSession | None:
     if response.status_code == 200:
-        response_200 = Page.from_dict(response.json())
+        response_200 = PageOfSession.from_dict(response.json())
 
 
 
@@ -88,7 +88,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | Page]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | PageOfSession]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -106,7 +106,7 @@ def sync_detailed(
     page_size: int | Unset = 15,
     sort: str | Unset = UNSET,
 
-) -> Response[Error | Page]:
+) -> Response[Error | PageOfSession]:
     """ List sessions in a collection, filtered by a body filter object
 
      POST is used because the body carries a filter object too rich
@@ -144,7 +144,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | Page]
+        Response[Error | PageOfSession]
      """
 
 
@@ -172,7 +172,7 @@ def sync(
     page_size: int | Unset = 15,
     sort: str | Unset = UNSET,
 
-) -> Error | Page | None:
+) -> Error | PageOfSession | None:
     """ List sessions in a collection, filtered by a body filter object
 
      POST is used because the body carries a filter object too rich
@@ -210,7 +210,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | Page
+        Error | PageOfSession
      """
 
 
@@ -233,7 +233,7 @@ async def asyncio_detailed(
     page_size: int | Unset = 15,
     sort: str | Unset = UNSET,
 
-) -> Response[Error | Page]:
+) -> Response[Error | PageOfSession]:
     """ List sessions in a collection, filtered by a body filter object
 
      POST is used because the body carries a filter object too rich
@@ -271,7 +271,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | Page]
+        Response[Error | PageOfSession]
      """
 
 
@@ -299,7 +299,7 @@ async def asyncio(
     page_size: int | Unset = 15,
     sort: str | Unset = UNSET,
 
-) -> Error | Page | None:
+) -> Error | PageOfSession | None:
     """ List sessions in a collection, filtered by a body filter object
 
      POST is used because the body carries a filter object too rich
@@ -337,7 +337,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | Page
+        Error | PageOfSession
      """
 
 

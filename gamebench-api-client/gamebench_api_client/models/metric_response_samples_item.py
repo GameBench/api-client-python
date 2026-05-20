@@ -8,25 +8,21 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
 
 
 
 
 
 
-T = TypeVar("T", bound="GetSessionResponse200Owners")
+T = TypeVar("T", bound="MetricResponseSamplesItem")
 
 
 
 @_attrs_define
-class GetSessionResponse200Owners:
+class MetricResponseSamplesItem:
     """ 
-        Attributes:
-            company_id (str | Unset):
      """
 
-    company_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -34,15 +30,9 @@ class GetSessionResponse200Owners:
 
 
     def to_dict(self) -> dict[str, Any]:
-        company_id = self.company_id
-
-
+        
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
-        if company_id is not UNSET:
-            field_dict["companyId"] = company_id
 
         return field_dict
 
@@ -51,15 +41,12 @@ class GetSessionResponse200Owners:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        company_id = d.pop("companyId", UNSET)
-
-        get_session_response_200_owners = cls(
-            company_id=company_id,
+        metric_response_samples_item = cls(
         )
 
 
-        get_session_response_200_owners.additional_properties = d
-        return get_session_response_200_owners
+        metric_response_samples_item.additional_properties = d
+        return metric_response_samples_item
 
     @property
     def additional_keys(self) -> list[str]:
